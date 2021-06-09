@@ -42,11 +42,6 @@ tasks.withType<Test> {
 	testLogging {
 		events  (TestLogEvent.FAILED,
 				TestLogEvent.SKIPPED,
-				TestLogEvent.STANDARD_ERROR)
-		exceptionFormat = TestExceptionFormat.FULL
-		showCauses = true
-		showExceptions = true
-		showStackTraces = true
-		showStandardStreams = true
+				TestLogEvent.PASSED)
 	}
 }
