@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
 	id("org.springframework.boot") version "2.5.0"
@@ -27,6 +28,13 @@ dependencies {
 	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
+tasks.test {
+		testLogging.showExceptions = true;
+}
+
+tasks.withType<Exec> {
+	isIgnoreExitValue = true
+}
 
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
@@ -37,4 +45,10 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+	testLogging {
+		events  (TestLogEvent.FAILED,
+				TestLogEvent.SKIPPED,
+				TestLogEvent.PASSED)
+	}
+
 }
