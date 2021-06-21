@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
@@ -29,6 +28,18 @@ dependencies {
 	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
+tasks.test {
+		testLogging.showExceptions = true;
+}
+
+tasks.withType<Exec> {
+	isIgnoreExitValue = true
+	doLast {
+		if((execResult?.exitValue ?: 0) as Boolean) {
+			println ("Tests failed!")
+		}
+	}
+}
 
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
@@ -44,4 +55,5 @@ tasks.withType<Test> {
 				TestLogEvent.SKIPPED,
 				TestLogEvent.PASSED)
 	}
+
 }
