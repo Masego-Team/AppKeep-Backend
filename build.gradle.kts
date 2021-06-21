@@ -7,6 +7,13 @@ plugins {
 	kotlin("jvm") version "1.5.10"
 	kotlin("plugin.spring") version "1.5.10"
 	kotlin("plugin.jpa") version "1.5.10"
+	kotlin("plugin.allopen") version "1.5.10"
+}
+
+allOpen {
+	annotation("javax.persistance.Entity")
+	annotation("javax.persistance.Embeddable")
+	annotation("javax.persistance.MappedSuperclass")
 }
 
 group = "com.example"
