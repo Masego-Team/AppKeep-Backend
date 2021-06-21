@@ -35,6 +35,9 @@ tasks.test {
 tasks.withType<Exec> {
 	isIgnoreExitValue = true
 	doLast {
+		if (result.failure != null) {
+
+		}
 		if((execResult?.exitValue ?: 0) as Boolean) {
 			println ("Tests failed!")
 		}
