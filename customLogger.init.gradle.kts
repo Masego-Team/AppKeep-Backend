@@ -7,7 +7,6 @@ class CustomEventLogger() : BuildAdapter(), TaskExecutionListener {
     }
 
     override fun afterExecute(task: Task, state: TaskState) {
-        println()
     }
 
     override fun buildFinished(result: BuildResult) {
