@@ -34,4 +34,4 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build -x test
     - name: Run tests
-      run: ./gradlew -I customLogger.init.gradle.kts test --stacktrace
+      run: ./gradlew -I customLogger.init.gradle.kts test
