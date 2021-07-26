@@ -15,4 +15,3 @@ class CustomEventLogger() : BuildAdapter(), TaskExecutionListener {
         }
     }
 }
-
