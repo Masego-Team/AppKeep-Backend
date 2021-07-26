@@ -15,6 +15,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
         http
+            .csrf().disable()
             .httpBasic()
             .and()
             .authorizeRequests()
@@ -22,7 +23,9 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
             .anyRequest().authenticated()
             .and()
             .logout()
-            .permitAll()
+            .logoutUrl("/perform_logout")
+            .deleteCookies("JSESSIONID")
+            .logoutSuccessUrl("/")
     }
 
     @Bean
