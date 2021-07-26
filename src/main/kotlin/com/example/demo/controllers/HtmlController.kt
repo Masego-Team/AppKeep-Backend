@@ -1,5 +1,6 @@
-package com.example.demo
+package com.example.demo.controllers
 
+import com.example.demo.DemoProperties
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.ui.set

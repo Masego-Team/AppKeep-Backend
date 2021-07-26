@@ -1,5 +1,7 @@
 package com.example.demo
 
+import com.example.demo.entities.User
+import com.example.demo.repositories.UserRepository
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
 import org.junit.jupiter.api.Disabled
