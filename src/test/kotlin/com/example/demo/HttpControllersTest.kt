@@ -2,6 +2,7 @@ package com.example.demo
 
 import com.ninjasquad.springmockk.MockkBean
 import io.mockk.every
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
@@ -17,6 +18,13 @@ class HttpControllersTest(@Autowired val mockMvc: MockMvc) {
         private lateinit var userRepository: UserRepository
 
         @Test
+        fun `Unauthorized request`() {
+                mockMvc.perform(get("/api/user/").accept(MediaType.APPLICATION_JSON))
+                        .andExpect(status().isUnauthorized)
+        }
+
+        @Test
+        @Disabled("Disabled until @WithMockUser is implemented")
         fun `List users`() {
                 val juergen = User("springjuergen", "Juergen", "Hoeller")
                 val smaldini = User( "smaldini", "Stéphane", "Maldini")
