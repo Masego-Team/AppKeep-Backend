@@ -8,7 +8,7 @@ import javax.persistence.Id
 data class User (
     val login: String,
     val firstName: String,
-    val lastname: String,
+    val lastName: String,
     val description: String? = null,
     @Id @GeneratedValue val id: Long? = null)
 

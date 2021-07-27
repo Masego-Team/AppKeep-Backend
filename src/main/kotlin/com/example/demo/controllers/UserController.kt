@@ -3,21 +3,21 @@ package com.example.demo.controllers
 import com.example.demo.entities.User
 import com.example.demo.repositories.UserRepository
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.server.ResponseStatusException
-import javax.annotation.PostConstruct
+import java.rmi.ServerException
+
 
 @RestController
 @RequestMapping("/user")
 class UserController(private val repository: UserRepository) {
-
-    @PostConstruct
-    fun initial() {
-        repository.save(User("userNameCheckout","Juanito", "deLos", "Palotes"))
-    }
 
     @GetMapping("/")
     fun findAll() = repository.findAll()
@@ -29,5 +29,19 @@ class UserController(private val repository: UserRepository) {
             "This user does not exist"
         )
     }
+
+    @PostMapping("/add_user", MediaType.APPLICATION_JSON_VALUE)
+    fun addUser(@RequestBody newUser: User): ResponseEntity<User> {
+        val user: User = repository.save(newUser)
+        return if (user == null) {
+            throw ResponseStatusException(
+                HttpStatus.NOT_FOUND,
+                "This user could not be created"
+            )
+        } else {
+            ResponseEntity(user, HttpStatus.CREATED)
+        }
+    }
+
 
 }
