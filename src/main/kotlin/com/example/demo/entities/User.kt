@@ -5,10 +5,10 @@ import javax.persistence.GeneratedValue
 import javax.persistence.Id
 
 @Entity
-class User (
-    var login: String,
-    var firstName: String,
-    var lastname: String,
-    var description: String? = null,
-    @Id @GeneratedValue var id: Long? = null)
+data class User (
+    val login: String,
+    val firstName: String,
+    val lastname: String,
+    val description: String? = null,
+    @Id @GeneratedValue val id: Long? = null)
 
