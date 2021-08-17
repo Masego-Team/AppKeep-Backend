@@ -19,7 +19,7 @@ import java.rmi.ServerException
 @RequestMapping("/user")
 class UserController(private val repository: UserRepository) {
 
-    @GetMapping("/")
+    @GetMapping
     fun findAll() = repository.findAll()
 
     @GetMapping("/{login}")
@@ -30,17 +30,10 @@ class UserController(private val repository: UserRepository) {
         )
     }
 
-    @PostMapping("/add_user", MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     fun addUser(@RequestBody newUser: User): ResponseEntity<User> {
         val user: User = repository.save(newUser)
-        return if (user == null) {
-            throw ResponseStatusException(
-                HttpStatus.NOT_FOUND,
-                "This user could not be created"
-            )
-        } else {
-            ResponseEntity(user, HttpStatus.CREATED)
-        }
+        return ResponseEntity(user, HttpStatus.CREATED)
     }
 
 
